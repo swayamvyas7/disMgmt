@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Import routing components
+import "./App.css";
+import Sidebar from "./components/Sidebar";
+import Dashboard from "./components/Dashboard";
+import HomePage from "./components/Homepage"; // Import HomePage for default route
+import EmergencyNumbers from "./components/EmergencyNumbers"; // Import EmergencyNumbers page
+import LoginSignupPopup from "./components/LoginSignupPopup";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const togglePopup = () => {
+    setIsPopupOpen(!isPopupOpen);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Router>
+      <div className="app">
+        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} onLoginClick={togglePopup} />
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<HomePage />} /> {/* Default route */}
+            <Route path="/dashboard" element={<Dashboard />} /> {/* Dashboard route */}
+            <Route path="/emergency-numbers" element={<EmergencyNumbers />} /> {/* Emergency Numbers route */}
+          </Routes>
+          <LoginSignupPopup isOpen={isPopupOpen} onClose={togglePopup} />
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;
