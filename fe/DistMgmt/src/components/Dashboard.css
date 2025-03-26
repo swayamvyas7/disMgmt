@@ -1,0 +1,294 @@
+.dashboard {
+    margin: 0; /* Remove any default margins */
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    font-family: Arial, sans-serif;
+    color: #333;
+    height: 100%; /* Ensure the dashboard takes up the full height of the content area */
+    box-sizing: border-box; /* Include padding and border in height calculation */
+}
+
+.dashboard-header {
+    margin-bottom: 20px;
+}
+
+.dashboard-header h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.dashboard-header p {
+    font-size: 14px;
+    color: #666;
+}
+
+.risk-assessment {
+    margin-bottom: 30px;
+}
+
+.risk-assessment h2 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.risk-bars {
+    margin-top: 10px;
+}
+
+.risk-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.risk-bar .label {
+    flex: 1;
+    font-size: 14px;
+}
+
+.risk-bar .bar {
+    flex: 3;
+    height: 10px;
+    background: #f0f0f0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 10px;
+}
+
+.risk-bar .fill {
+    height: 100%;
+    background: red;
+}
+
+.risk-bar .fill.green {
+    background: green;
+}
+
+.risk-bar .fill.orange {
+    background: orange;
+}
+
+.risk-bar .fill.red {
+    background: red;
+}
+
+.risk-bar .level {
+    flex: 1;
+    font-size: 12px;
+    text-align: right;
+}
+
+.risk-bar .level.moderate {
+    color: orange;
+}
+
+.risk-bar .level.high {
+    color: red;
+}
+
+.risk-bar .level.low {
+    color: green;
+}
+
+.view-map-button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.location {
+    margin: 0 auto; /* Center the location section */
+    text-align: center; /* Center-align the content */
+}
+
+.location h2 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.location-details {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center the content vertically */
+}
+
+.location-details h3 {
+    font-size: 48px; /* Make the temperature degrees larger */
+    margin: 0;
+    font-weight: bold;
+}
+
+.location-details p {
+    font-size: 16px; /* Keep the description smaller */
+    margin-top: 10px;
+}
+
+.location-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.location-details ul li {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.update-location-button {
+    padding: 8px 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Remove styles related to recent alerts */
+.recent-alerts {
+    display: none;
+}
+
+.alert {
+    display: none;
+}
+
+.alert h3 {
+    display: none;
+}
+
+.alert p {
+    display: none;
+}
+
+.alert-level {
+    display: none;
+}
+
+.weather-today {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.weather-today h2 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.risk-semicircles {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.risk-semicircle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 10px;
+}
+
+.semicircle {
+    position: relative;
+    width: 100px;
+    height: 50px;
+    background: #f0f0f0;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    overflow: hidden;
+}
+
+.semicircle-fill {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: red;
+    border-radius: 50%;
+    transform-origin: center bottom;
+    transform: rotate(0deg);
+}
+
+.semicircle-bg {
+    stroke-width: 2;
+}
+
+.semicircle-progress {
+    stroke-width: 2;
+    transform: rotate(-90deg);
+    transform-origin: center;
+}
+
+.risk-semicircle .label {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.risk-semicircle .level {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.risk-semicircle .level.moderate {
+    color: orange;
+}
+
+.risk-semicircle .level.high {
+    color: red;
+}
+
+.risk-semicircle .level.low {
+    color: green;
+}
+
+.risk-circles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.risk-circle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 10px;
+}
+
+.circle {
+    width: 80px;
+    height: 80px;
+    transform: rotate(-90deg);
+}
+
+.circle-bg {
+    stroke-width: 2;
+}
+
+.circle-progress {
+    stroke-width: 2;
+    transform-origin: center;
+}
+
+.circle-text {
+    font-size: 10px;
+    fill: #333;
+    transform: rotate(90deg);
+}
+
+.risk-circle .label {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}

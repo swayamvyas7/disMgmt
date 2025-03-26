@@ -1,0 +1,198 @@
+/* Sidebar container */
+.sidebar {
+    position: fixed; /* Ensure the sidebar is fixed */
+    top: 0;
+    left: 0;
+    width: 180px; /* Sidebar width */
+    height: 100vh; /* Full height of the viewport */
+    background: linear-gradient(135deg, #ffffff, #f0f0f0); /* Gradient background */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    font-family: Arial, sans-serif;
+    z-index: 1000; /* Ensure the sidebar is above other content */
+    transition: transform 0.3s ease; /* Smooth transition for open/close */
+}
+
+.sidebar.closed {
+    transform: translateX(-100%); /* Hide sidebar when closed */
+}
+
+.sidebar.open {
+    transform: translateX(0); /* Show sidebar when open */
+}
+
+/* Logo Section */
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+}
+
+.logo-icon {
+    color: red;
+}
+
+.logo-text {
+    margin-left: 8px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+/* Navigation */
+.sidebar-nav {
+    flex: 1;
+    margin-top: 20px;
+}
+
+.nav-section {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 8px;
+    padding-left: 10px;
+}
+
+/* Nav Items */
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 6px;
+    color: #333;
+    cursor: pointer;
+    text-decoration: none; /* Remove underline for links */
+    transition: background 0.2s ease;
+}
+
+.nav-item span {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.nav-item:hover {
+    background: #f5f5f5;
+}
+
+.active {
+    background: #f0f0f0;
+    font-weight: bold;
+}
+
+/* Remove default hyperlink styling for sidebar links */
+.nav-link {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color */
+    display: flex; /* Ensure proper alignment with icons */
+    align-items: center;
+    gap: 10px; /* Add spacing between icon and label */
+}
+
+.nav-link:hover {
+    color: #007bff; /* Optional: Add hover effect */
+}
+
+/* Footer Buttons */
+.sidebar-footer {
+    margin-top: auto;
+    margin-bottom: 40px; /* Increased margin to move the button further up */
+}
+
+.login-button {
+    width: 100%;
+    padding: 12px; /* Increased padding */
+    background: #ff0000; /* Updated to match red icons */
+    border: none;
+    border-radius: 8px; /* Increased border radius */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold; /* Made text bold */
+    color: #fff; /* Changed text color to white */
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease; /* Added transition effects */
+}
+
+.login-button:hover {
+    background: #cc0000; /* Darker red on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Added shadow on hover */
+}
+
+.theme-toggle {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    background: #f9f9f9;
+    border: none;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.theme-toggle:hover {
+    background: #f2f2f2;
+}
+
+.sidebar-toggle {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    background: #ffffff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-toggle:hover {
+    background: #f0f0f0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 180px; /* Reduce sidebar width for smaller screens */
+        height: 100vh;
+        position: fixed;
+        transform: translateX(-100%); /* Initially hide sidebar */
+    }
+
+    .sidebar.open {
+        transform: translateX(0); /* Show sidebar when open */
+    }
+
+    .content {
+        margin-left: 0; /* Remove margin for content */
+        width: 100%; /* Full width for content */
+    }
+}
+
+.emergency-numbers {
+    padding-left: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.emergency-numbers ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.emergency-numbers li {
+    margin-bottom: 8px;
+}
