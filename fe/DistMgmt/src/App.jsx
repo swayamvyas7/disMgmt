@@ -6,6 +6,7 @@ import Dashboard from "./components/Dashboard";
 import HomePage from "./components/Homepage"; // Import HomePage for default route
 import EmergencyNumbers from "./components/EmergencyNumbers"; // Import EmergencyNumbers page
 import LoginSignupPopup from "./components/LoginSignupPopup";
+import DisasterPrediction from "./components/DisasterPrediction"; // Import DisasterPrediction component
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -28,6 +29,7 @@ function App() {
             <Route path="/" element={<HomePage />} /> {/* Default route */}
             <Route path="/dashboard" element={<Dashboard />} /> {/* Dashboard route */}
             <Route path="/emergency-numbers" element={<EmergencyNumbers />} /> {/* Emergency Numbers route */}
+            <Route path="/disaster-prediction" element={<DisasterPrediction />} /> {/* Disaster Prediction route */}
           </Routes>
           <LoginSignupPopup isOpen={isPopupOpen} onClose={togglePopup} />
         </div>

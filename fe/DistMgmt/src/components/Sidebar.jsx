@@ -26,7 +26,7 @@ const Sidebar = ({ isOpen, toggleSidebar, onLoginClick }) => {
         <p className="nav-section">Main</p>
         <NavItem icon={<Home size={20} />} label="Home" to="/" />
         <NavItem icon={<LayoutDashboard size={20} />} label="Dashboard" to="/dashboard" />
-        <NavItem icon={<Activity size={20} />} label="Disaster Prediction" />
+        <NavItem icon={<Activity size={20} />} label="Disaster Prediction" to="/disaster-prediction" />
         <NavItem icon={<MapPin size={20} />} label="Risk Mapping" />
         <NavItem icon={<Bell size={20} />} label="Alerts & Notifications" />
 
