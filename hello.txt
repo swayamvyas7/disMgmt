@@ -1,0 +1,1051 @@
+# Go to your project folder
+cd /path/to/flightrepo
+
+# Clean and build the project (generates WAR/JAR in target/)
+mvn clean install
+
+# Check that the artifact exists
+ls target
+
+
+# Initialize repo
+git init
+
+# Configure global username & email (only once)
+git config --global user.name "Your Name"
+git config --global user.email "youremail@example.com"
+
+# Add all project files
+git add .
+git commit -m "Initial commit"
+
+# Link to GitHub repo & push
+git remote add origin https://github.com/<your-username>/<your-repo>.git
+git branch -M main
+git push -u origin main
+
+# Create new branch
+git checkout -b feature/search_flights_by_airline
+
+# Merge updates from main into your branch
+git checkout feature/search_flights_by_airline
+git pull origin main
+
+# Resolve conflicts (edit file manually), then:
+git add conflicted-file.jsp
+git commit -m "Resolved merge conflict"
+
+# Delete branch after merge
+git branch -d feature/search_flights_by_airline
+git push origin --delete feature/search_flights_by_airline
+
+# Undo last commit but keep changes
+git reset --soft HEAD~1
+
+# See remote branches
+git fetch --all
+git branch -r
+
+# Find who last modified a file
+git blame register.jsp
+
+# See last commit details
+git log -1
+
+
+# Build Docker image from Dockerfile
+docker build -t vishesh21gupta/library-registration:v1 .
+
+# Verify image is built
+docker images
+
+# Run container manually (optional)
+docker run -d -p 8080:8080 vishesh21gupta/library-registration:v1
+
+# Push image to Docker Hub
+docker login
+docker push vishesh21gupta/library-registration:v1
+
+
+# Run nginx on port 8080
+docker run -d -p 8080:80 nginx
+
+# List running containers
+docker ps
+
+# Stop a container
+docker stop carcontainer
+
+# View logs of a container
+docker logs carcontainer
+
+# Resource usage of containers
+docker stats
+
+# Open shell in running container
+docker exec -it app /bin/sh
+docker exec -it ubuntu /bin/bash  # for Ubuntu
+
+# Find container using port 3000
+docker ps --filter "publish=3000"
+
+# Start container with shell immediately
+docker run -it ubuntu /bin/bash
+
+# Delete an image
+docker rmi vishesh21gupta/library-registration:v1
+
+
+# Start all services in background
+docker-compose up -d
+
+# View running services
+docker-compose ps
+
+# View logs
+docker-compose logs -f
+
+# Scale to 3 instances
+docker-compose up -d --scale app=3
+
+# Stop services
+docker-compose down
+
+
+# Login
+mysql -u root -p
+
+# Show logged in user
+SELECT USER(), CURRENT_USER();
+
+# List all users
+SELECT user, host FROM mysql.user;
+
+# Reset password if needed
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'newpassword';
+FLUSH PRIVILEGES;
+
+
+services:
+  app:
+    image: your-dockerhub-username/library-registration:latest
+    container_name: library_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=rootpassword
+      - DB_NAME=librarydb
+
+  db:
+    image: mysql:8.0
+    container_name: library_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: librarydb
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+
+
+
+
+
+
+
+
+
+
+
+  2) Clone + Build the flightrepo (Q2) — commands
+# clone
+git clone https://github.com/anujyog1/flightrepo.git
+cd flightrepo
+
+# quick build
+mvn clean package
+
+# if build fails due to missing dependencies, try:
+mvn -U -e -X clean package
+# check dependency tree
+mvn dependency:tree
+
+
+After success, verify artifact: ls target/ (you should see .war or .jar).
+
+Verify content: jar -tf target/*.war or unzip -l target/*.war
+
+If POM needs change (common issues)
+
+Open pom.xml and ensure:
+
+<packaging>war</packaging> if it's a web app.
+
+Compiler plugin set to correct Java version:
+
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>3.11.0</version>
+      <configuration>
+        <source>17</source>
+        <target>17</target>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+
+
+If you need to run on Tomcat locally, add tomcat7-maven-plugin for mvn tomcat7:run (optional).
+
+In Eclipse
+
+File → Import → Maven → Existing Maven Projects → select flightrepo → Finish.
+
+Right-click project → Run As → Maven build → goals: clean package.
+
+Or run on local Tomcat server (Servers view → add Tomcat → deploy WAR).
+
+3) Q1 — ready-to-paste answers (10 marks: Abstract 3, FR 2, NFR 3, Users 2)
+
+Abstract (paste):
+A web-based Online Learning Platform to enable students, teachers, and administrators to create, manage and participate in courses. The platform supports course creation, enrollment, content uploads, assessments, progress tracking and role-based access to deliver a scalable, accessible, and engaging learning experience.
+
+Functional Requirements (list):
+
+User registration & role-based login (Student/Teacher/Admin).
+
+Course CRUD (create/edit/delete) for teachers.
+
+Enrollment & course catalog for students.
+
+Upload course content (PDF, video), assignments and quizzes.
+
+Progress tracking, grades, and notifications.
+
+Non-Functional Requirements (list):
+
+Scalability to support concurrent users.
+
+Security: authentication, authorization, input validation.
+
+Availability: 99% uptime, backup & recovery.
+
+Performance: page load < 2s for core pages.
+
+Usability: responsive UI for desktop and mobile.
+
+Users:
+
+Students — enroll & consume content.
+
+Teachers — create courses, grade, manage content.
+
+Administrators — manage users, courses, system configs.
+
+(You can expand 1–2 lines per bullet if asked.)
+
+
+4) Q3 — Git & GitHub answers (30 marks) — exact commands & short explanation
+
+Initialize repo & push (first time):
+
+# in project folder
+git init
+git add -A
+git commit -m "Initial commit"
+git remote add origin https://github.com/<youruser>/flightrepo.git
+git push -u origin main
+
+
+Set global config:
+
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+
+
+Scenario Qs (commands + short note):
+
+Add feature search_flights_by_airline — create branch and push
+
+git checkout -b search_flights_by_airline
+# make changes
+git add .
+git commit -m "feat: add search_flights_by_airline"
+git push -u origin search_flights_by_airline
+
+
+Your teammate changed same feature on main — incorporate updates into paymentintegration feature
+
+git checkout paymentintegration
+git fetch origin
+git merge origin/main
+# OR rebase:
+# git rebase origin/main
+
+
+Merge conflict in login.jsp — resolve and complete merge
+
+Open login.jsp, find conflict markers <<<<<<<, =======, >>>>>>>, edit to final content.
+
+git add login.jsp
+git commit -m "Resolve merge conflict in login.jsp"
+# merge completes
+
+
+Delete merged branch locally & remotely
+
+git branch -d search_flights_by_airline        # local
+git push origin --delete search_flights_by_airline  # remote
+
+
+Modified Booking register.jsp — push to GitHub
+
+git add Booking/register.jsp
+git commit -m "fix: update register.jsp"
+git push
+
+
+New developer clone repo
+
+git clone https://github.com/<org>/flightrepo.git
+
+
+You pushed a wrong change — undo commit but keep history clean
+
+Use git revert to create a new commit that undoes changes:
+
+git revert <bad-commit-hash>
+git push
+
+
+See branches that exist on GitHub (remote) but not locally
+
+git fetch origin
+git branch -r          # lists remote branches
+git branch             # lists local branches
+# compare and create local from remote: git checkout -b branch origin/branch
+
+
+Who last modified register.jsp
+
+git blame Booking/register.jsp
+# or get last commit touching file:
+git log -1 --pretty=format:"%h %an %ad %s" -- Booking/register.jsp
+
+
+Full details of the last commit
+
+git show --stat HEAD
+# or
+git log -1 --pretty=fuller
+
+5) Q4 — Dockerize Maven project (20 marks) — Dockerfile + commands + scenario Qs
+Dockerfile (for a WAR deployed to Tomcat)
+
+Create Dockerfile in project root (after you built target/*.war):
+
+# Use official Tomcat image
+FROM tomcat:9.0-jdk11
+# Remove default apps (optional)
+RUN rm -rf /usr/local/tomcat/webapps/*
+# Copy your WAR (assumes mvn package placed .war in target/)
+COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
+
+Build image and push to Docker Hub
+# build
+docker build -t yourdockerhubusername/flightapp:v1 .
+
+# login
+docker login
+
+# push
+docker push yourdockerhubusername/flightapp:v1
+
+Scenario Qs — quick answers
+
+Run nginx on port 8080
+
+docker run -d -p 8080:80 --name mynginx nginx
+
+
+List running containers
+
+docker ps
+
+
+Stop container named carcontainer
+
+docker stop carcontainer
+
+
+Check logs for crashed container
+
+docker logs <container-name-or-id>
+# follow:
+docker logs -f <container>
+
+
+See CPU/RAM uses
+
+docker stats
+
+
+To limit RAM when starting container: docker run -m 512m ...
+
+Open shell inside running container app
+
+docker exec -it app /bin/bash   # or /bin/sh
+
+
+Open shell inside running container ubuntu
+
+docker exec -it ubuntu /bin/bash
+
+
+3 instances with docker-compose
+
+Start with docker-compose up -d --scale app=3 (if service name is app)
+
+Which container uses port 3000
+
+docker ps   # check PORTS column
+# or on host:
+sudo lsof -i :3000
+# or
+sudo netstat -tulpn | grep 3000
+
+
+Start container and work inside immediately
+
+docker run -it --rm yourimage /bin/bash
+
+
+Delete an image
+
+docker rmi yourdockerhubusername/flightapp:v1
+
+6) Q5 — docker-compose.yml (multi-container) — ready file (8 marks)
+
+Create docker-compose.yml:
+
+version: "3.8"
+services:
+  app:
+    image: yourdockerhubusername/flightapp:v1
+    container_name: flightapp
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: flightdb
+    environment:
+      MYSQL_ROOT_PASSWORD: exampleRootPass
+      MYSQL_DATABASE: flightdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+
+
+Start services:
+
+docker-compose up -d
+docker-compose ps
+# logs
+docker-compose logs -f
+
+
+
+
+
+#tsitp
+Q1) Software Requirement Specification (SRS) — Hospital Management System (HMS)
+a) Abstract (4M)
+
+The Hospital Management System (HMS) is a web application that digitizes a hospital’s daily operations—patient onboarding, appointments, consultations, orders, billing, pharmacy and lab flows—while protecting sensitive medical data. It supports multiple roles (admin, doctors, nurses, reception, lab, pharmacy, billing and patients) with role-based access, audit trails, and integrations (e.g., email/SMS). Goals: reduce waiting time, avoid record duplication, improve accuracy, and provide real-time operational reports for better decisions.
+
+b) Functional Requirements (2M)
+
+Patient registration & demographics (create, update, search).
+
+Appointment scheduling (book, reschedule, cancel; doctor availability).
+
+Encounter/OPD notes & diagnoses; prescriptions.
+
+Orders: lab tests & imaging; results upload/entry and viewing.
+
+Pharmacy: drug catalog, stock, dispensing against prescriptions.
+
+Billing & payments: estimates, invoices, receipts, insurance support.
+
+User & role management (create users, assign roles/permissions).
+
+Reports & dashboards (daily census, revenue, pending tests).
+
+Audit log of critical actions.
+
+c) Non-Functional Requirements (2M)
+
+Security & privacy: authentication, RBAC, encryption at rest/in transit, audit trails.
+
+Reliability & availability: ≥99% uptime target; regular backups & restore.
+
+Performance: typical page ≤3s under normal load; concurrent users 100+ (configurable).
+
+Scalability: horizontal scaling of stateless services.
+
+Usability: responsive UI, accessibility basics (keyboard nav, ARIA).
+
+Interoperability: export/import CSV; optional HL7/FHIR adapters.
+
+Compliance: follow local medical data regulations (HIPAA-like principles).
+
+d) Identification of Users (2M)
+
+Admin, Doctor, Nurse, Receptionist/Front-desk, Lab Technician, Pharmacist, Billing/Accounts, Radiology Tech (optional), Patient/Patient-portal user, and IT/Support.
+
+Q2) Maven Java Application Development (30M) — items 1–6 on page 1
+
+Repo (as given on the paper):
+https://github.com/KumbhamBharagavi25/HospitalMgmtSystem
+
+1) Download the repo and show list of files (3M)
+# clone
+git clone https://github.com/KumbhamBharagavi25/HospitalMgmtSystem.git
+cd HospitalMgmtSystem
+
+# list files (any one is fine)
+ls -la
+# or on Windows
+dir
+
+2) “mvn CLEAN package” gives Unknown lifecycle phase error — why? (3M)
+
+Maven lifecycle phases are lowercase and space-separated. CLEAN is not a phase; clean is.
+Correct usage:
+
+mvn clean package
+
+
+(You can also run phases separately: mvn clean then mvn package.)
+
+3) Add dependency servlet-api 2.5 (2M)
+
+Servlet API is provided by the container (Tomcat), so mark it provided:
+
+<dependencies>
+  <dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>servlet-api</artifactId>
+    <version>2.5</version>
+    <scope>provided</scope>
+  </dependency>
+  <!-- other deps... -->
+</dependencies>
+
+4) Build fails on JDK 21 — why & fix in pom.xml (2M)
+
+Common reasons:
+
+Project targets old source/bytecode (e.g., 1.6/1.7) and needs the release level set.
+
+Old Maven Compiler Plugin defaults cause mismatch with modern JDKs.
+
+Fix: configure the Compiler Plugin to compile for a supported release (e.g., 8 or 11) and use a recent plugin version:
+
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>3.11.0</version>
+      <configuration>
+        <!-- Choose one: either release OR source+target -->
+        <release>8</release>
+        <!-- or:
+        <source>1.8</source>
+        <target>1.8</target>
+        -->
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+
+
+(Keeping release at 8 works well with older servlet apps while building on JDK 21.)
+
+5) Given dependency snippet — what happens & how to solve? (2M)
+
+The paper shows something like:
+
+<dependency>
+  <groupId>SE</groupId>
+  <artifactId>junit</artifactId>
+  <version>1.6.0</version>
+  <dependencies>
+
+
+Issues:
+
+<dependencies> is wrongly nested inside <dependency> (POM becomes non-parseable).
+
+GroupId/version look incorrect for JUnit.
+
+For unit tests, scope should be test.
+
+Maven’s behavior: it fails early with a POM parsing/validation error.
+
+Correct fix (JUnit 4) :
+
+<dependencies>
+  <dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.13.2</version>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+
+
+(or JUnit 5: org.junit.jupiter:junit-jupiter:5.10.2 plus surefire config.)
+
+6) WAR name shows hospitalmgmt-0.0.1-SNAPSHOT.war but you want HospitalMgmtSystem.war (3M)
+
+Set the final artifact name in the build:
+
+<build>
+  <finalName>HospitalMgmtSystem</finalName>
+  <!-- for WAR projects you can also use the war plugin: -->
+  <!--
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-war-plugin</artifactId>
+      <version>3.4.0</version>
+      <configuration>
+        <warName>HospitalMgmtSystem</warName>
+      </configuration>
+    </plugin>
+  </plugins>
+  -->
+</build>
+
+
+that’s the entire first side done.
+Want me to move to the next side (continuation of Q2 items 7–13 + Q3 Git tasks)? Say “yes” when ready.
+
+You said:
+before we proceed to next side of paper tell what were the learnings from 1st side of paper?
+ChatGPT said:
+
+here’s a crisp “what I learned” recap from side-1:
+
+SRS (HMS)
+
+What an SRS contains: Abstract, Functional vs Non-functional requirements, and User types.
+
+Think in roles & flows: map actors (admin, doctor, nurse, etc.) to core workflows (registration → appointment → consultation → orders → billing).
+
+Quality gates: security (RBAC, encryption, audit), performance targets, reliability/backups, usability, and compliance.
+
+Maven fundamentals
+
+Lifecycle phases are lowercase: mvn clean package (not CLEAN).
+
+Dependencies live under <dependencies>; each has groupId, artifactId, version, scope.
+
+Servlet API is provided: container (Tomcat) supplies it at runtime—don’t bundle it.
+
+Compiler settings must match toolchain: configure maven-compiler-plugin with <release>8</release> (or desired level) to build on modern JDKs.
+
+Bad POM structure breaks the build: misplaced <dependencies> or wrong coords (e.g., for JUnit) cause parse/resolve errors.
+
+Test libs use test scope (e.g., junit:junit:4.13.2 or JUnit 5).
+
+Artifact naming: control output file via <build><finalName>HospitalMgmtSystem</finalName></build> (or war plugin’s warName).
+
+Command muscle memory
+
+git clone <repo> && cd <repo> && ls -la to fetch and inspect.
+
+mvn clean package to produce a WAR; fix POM issues if it fails.
+
+Mindset takeaways
+
+Separate what (requirements) from how (implementation).
+
+Keep builds reproducible: correct scopes, versions, and plugin config.
+
+Container-provided APIs (Servlet) shouldn’t be packaged into your WAR.
+
+ready to move to the next side (Q2 items 7–13 + Q3 Git tasks)?
+
+You said:
+yes please! lets proceed to next side of paper
+ChatGPT said:
+Thought for 1m 16s
+
+sweet — here’s Side-2 fully solved (Q2: 7–13 + all of Q3). I’ll keep each sub-answer short, with the exact snippet/command you can copy.
+
+Q2) Maven (continued)
+7) Add Java Servlet API 4.0.0-b01 dependency (and run)
+
+Add it as provided (Tomcat supplies it at runtime):
+
+<dependencies>
+  <dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>javax.servlet-api</artifactId>
+    <version>4.0.0-b01</version>
+    <scope>provided</scope>
+  </dependency>
+</dependencies>
+
+
+Build:
+
+mvn clean package
+
+8) If <dependencies> section is removed entirely, will build still work? Issues in testing?
+
+May still compile if your code needs no external libs.
+
+But tests usually fail (e.g., no JUnit on classpath). Also any web/DB/logging libs vanish → ClassNotFoundException at compile/test time.
+➡️ Keep a proper <dependencies> block.
+
+9) Error: No compiler is provided in this environment. Perhaps you are running on a JRE rather than a JDK?
+
+Meaning: Maven found only a JRE.
+Fix:
+
+Install a JDK.
+
+Point JAVA_HOME to the JDK and ensure Maven uses it:
+
+# Linux/macOS
+export JAVA_HOME=$(/usr/libexec/java_home)   # or your JDK path
+export PATH="$JAVA_HOME/bin:$PATH"
+mvn -v  # should show a JDK
+
+# Windows (PowerShell, example)
+setx JAVA_HOME "C:\Program Files\Java\jdk-21"
+setx PATH "%JAVA_HOME%\bin;%PATH%"
+
+
+(Optionally configure maven-compiler-plugin as shown on side-1.)
+
+10) <finalName>localhost:8080/FoodSystem</finalName> — what & fix?
+
+<finalName> controls artifact filename, not the URL.
+Fix it to the context name only:
+
+<build>
+  <finalName>FoodSystem</finalName>  <!-- produces FoodSystem.war -->
+</build>
+
+
+You’ll access it as http://localhost:8080/FoodSystem/ when deployed.
+
+11) Project targets Tomcat but POM has <packaging>jar</packaging>. How to solve?
+
+Webapps must be WAR:
+
+<packaging>war</packaging>
+
+
+Keep servlet API as provided; optionally add maven-war-plugin.
+
+12) In <url>http://maven.java.org/2</url> — will Maven accept it? What’s <url> for?
+
+Maven accepts any valid URL here, but it’s only project homepage metadata (shown on sites/reports).
+
+It doesn’t define where to download deps. For repositories use:
+
+<repositories>
+  <repository>
+    <id>central</id>
+    <url>https://repo.maven.apache.org/maven2</url>
+  </repository>
+</repositories>
+
+13) “Check the complete pom.xml and push to your GitHub”
+
+Typical steps (after fixes):
+
+git add pom.xml
+git commit -m "Fix packaging to war, servlet-api provided, finalName, compiler config"
+# push to your own repo (replace URL)
+git remote remove origin
+git remote add origin https://github.com/<your-username>/HospitalMgmtSystem.git
+git push -u origin main
+
+Q3) Git & GitHub tasks (30M)
+
+Discard unstaged local changes to one file
+
+git restore path/to/file          # new syntax
+# or: git checkout -- path/to/file
+
+
+Wrong commit message (not pushed yet)
+
+git commit --amend -m "Correct message"
+
+
+View commit history (readable)
+
+git log --oneline --graph --decorate --all
+
+
+Create and switch to Feature/patient from main
+
+git switch main
+git switch -c Feature/patient     # create + switch
+# (older) git checkout -b Feature/patient
+
+
+Push local commits to remote
+
+git push -u origin Feature/patient   # first push sets upstream
+
+
+List all branches (local + remote)
+
+git branch -a
+# (details) git remote show origin
+
+
+Create branch Suggestions and merge with patient
+
+git switch -c Suggestions
+# ... commits ...
+git switch Feature/patient
+git merge Suggestions               # fast-forward or merge commit
+
+
+Pull latest remote changes into current branch
+
+git pull            # fetch + merge
+# or safer, linear history:
+git pull --rebase
+
+
+First push and set remote tracking branch
+
+git push -u origin <branch-name>
+
+
+Change to a different remote repository
+
+git remote set-url origin https://github.com/<new-user>/<new-repo>.git
+# or add a new remote:
+git remote add upstream https://github.com/<org>/<repo>.git
+
+
+Local branch behind remote — update without losing local changes
+
+git pull --rebase   # replay your commits atop remote
+# if conflicts: resolve, then `git rebase --continue`
+
+
+(Alternative: git stash, git pull, git stash pop.)
+
+Delete remote branch patient
+
+git push origin --delete patient
+# (old syntax) git push origin :patient
+
+
+Apply a teammate’s patch and include in history
+
+If created via git format-patch:
+
+git am /path/to/0001-some-change.patch
+
+
+If it’s a raw diff:
+
+git apply /path/to/change.patch
+git commit -m "Apply teammate patch: <description>"
+
+
+that’s the whole second side done ✅.
+Shall we move to the final side (Docker CLI + Docker Compose)?
+
+You said:
+yes
+ChatGPT said:
+Thought for 1m 30s
+
+awesome — final side coming up: Q4 (Docker CLI) and Q5 (Docker Compose). I’ll give you exact commands plus 1 working Dockerfile and 1 working docker-compose.yml.
+
+Q4) Docker containerization for Maven app (20M)
+
+Task: Containerize your Maven project. Ensure the image runs your WAR/JAR on Tomcat (or a base that makes sense).
+
+A. Minimal Dockerfile (WAR on Tomcat)
+
+Put this Dockerfile at the project root after you’ve built target/HospitalMgmtSystem.war.
+
+# -------- build stage (optional if you build locally) --------
+# FROM maven:3.9-eclipse-temurin-17 AS build
+# WORKDIR /app
+# COPY . .
+# RUN mvn -q -DskipTests package
+
+# -------- runtime stage --------
+FROM tomcat:9.0-jdk17-temurin    # Tomcat serves on 8080
+# clean default ROOT and copy our war
+RUN rm -rf /usr/local/tomcat/webapps/ROOT
+# If you built locally:
+COPY target/HospitalMgmtSystem.war /usr/local/tomcat/webapps/ROOT.war
+# If you used the build stage instead, replace COPY with:
+# COPY --from=build /app/target/HospitalMgmtSystem.war /usr/local/tomcat/webapps/ROOT.war
+
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
+
+
+(If your app builds a JAR instead, use FROM eclipse-temurin:17-jre and CMD ["java","-jar","app.jar"].)
+
+Now answer each sub-question (1–10)
+
+1) Build image named hospital-mgmt
+
+docker build -t hospital-mgmt .
+
+
+2) List all images
+
+docker images
+# or
+docker image ls
+
+
+3) Run and map container 8080 → host 9090 (detached, named)
+
+docker run -d --name hms -p 9090:8080 hospital-mgmt
+
+
+4) Pull official Redis, run it, list running containers, verify
+
+docker pull redis:latest
+docker run -d --name myredis -p 6379:6379 redis:latest
+docker ps
+# verify it’s reachable:
+docker exec -it myredis redis-cli ping     # expects PONG
+# (For a webapp on port 8080 you’d verify with: curl -I http://localhost:8080)
+
+
+5) Tag and push your image to Docker Hub as yourusername/hms
+
+docker tag hospital-mgmt yourusername/hms:latest
+docker login
+docker push yourusername/hms:latest
+
+
+6) Forgot port mapping; can’t access app. Stop, remove, rerun correctly
+
+docker stop hms
+docker rm hms
+docker run -d --name hms -p 9090:8080 hospital-mgmt
+
+
+7) Container crashes immediately—inspect logs
+
+docker logs hms          # recent logs
+docker logs -f hms       # follow logs live
+
+
+8) (Duplicate push, but complete flow) Make image public on Docker Hub
+
+docker login
+docker tag hospital-mgmt yourusername/hms:1.0
+docker push yourusername/hms:1.0
+# then on hub.docker.com → repo settings → visibility: Public
+
+
+9) Open a shell inside the running container
+
+docker exec -it hms /bin/bash
+# (or /bin/sh if bash isn’t present)
+
+
+10) List removed / stopped containers
+
+Stopped (but not removed):
+
+docker ps -a
+docker ps -a --filter status=exited
+
+
+If you actually removed them, Docker won’t list them anymore; only history via events:
+
+docker events --since 1h --until 0s --filter type=container
+
+Q5) Docker Compose (10M)
+
+Goal: Compose file for CampusMgmtSystem app + MongoDB.
+
+Container 1: use your pushed image (e.g., yourusername/hms:latest) and expose the app on host 7079 (→ container 8080).
+
+Container 2: MongoDB as database.
+
+Create docker-compose.yml:
+
+version: "3.9"
+
+services:
+  app:
+    image: yourusername/hms:latest        # image you pushed in Q4
+    container_name: campusmgmt_app
+    ports:
+      - "7079:8080"                       # host:container
+    depends_on:
+      - mongo
+    environment:
+      # add what your app needs; examples:
+      - MONGO_URI=mongodb://mongo:27017/campusdb
+      - JAVA_OPTS=-Xms256m -Xmx512m
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:6
+    container_name: campusmgmt_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+
+volumes:
+  mongo_data:
+
+
+Compose commands you’ll use
+
+docker compose up -d         # start both
+docker compose ps            # list
+docker compose logs -f app   # follow app logs
+docker compose down          # stop & remove
